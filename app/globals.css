@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 16 94% 42%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 16 94% 42%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 16 94% 42%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 16 94% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Font Definitions */
+@font-face {
+  font-family: "Open Sauce";
+  src: url("/fonts/OpenSauceOne-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Custom Colors */
+.text-black {
+  color: #aaaaaa;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-orange {
+  color: #cb450c;
+}
+
+.text-boulder {
+  color: #111111;
+}
+
+.text-gray {
+  color: #777777;
+}
+
+.bg-black {
+  background-color: #aaaaaa;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.bg-orange {
+  background-color: #cb450c;
+}
+
+.bg-boulder {
+  background-color: #111111;
+}
+
+.bg-gray {
+  background-color: #777777;
+}
+
+.border-orange {
+  border-color: #cb450c;
+}
+
+.border-gray {
+  border-color: #777777;
+}
+
+.border-boulder {
+  border-color: #111111;
+}
+
+/* Font Classes */
+.font-bebas {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.font-sauce {
+  font-family: "Open Sauce", arial, sans-serif;
+}
+
+/* Smooth transitions */
+a,
+button {
+  @apply transition-all duration-200;
+}
+
+/* Animation utilities */
+.animate-in {
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+
+.slide-in-from-top {
+  animation-name: slideInFromTop;
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Loader Animation */
+.loader {
+  width: 100%;
+  max-width: 200px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loader-bar {
+  width: 0;
+  height: 100%;
+  background-color: #cb450c;
+  animation: loading 1.5s infinite ease-in-out;
+}
+
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Glow effect */
+.shadow-glow {
+  box-shadow: 0 0 15px rgba(203, 69, 12, 0.2);
+}
+
+.hover\:shadow-glow:hover {
+  box-shadow: 0 0 20px rgba(203, 69, 12, 0.3);
+}
