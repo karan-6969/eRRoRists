@@ -1,32 +1,32 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { usePathname } from "next/navigation"
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
+      setScrolled(window.scrollY > 20);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { name: "Ideas", path: "/ideas" },
     { name: "Submit", path: "/submit" },
     { name: "Join Us", path: "/join" },
     { name: "About", path: "/about" },
-  ]
+  ];
 
   return (
     <motion.header
@@ -53,7 +53,9 @@ export default function Header() {
               key={item.path}
               href={item.path}
               className={`text-sm font-medium transition-colors relative ${
-                pathname === item.path ? "text-orange" : "text-white hover:text-orange"
+                pathname === item.path
+                  ? "text-orange"
+                  : "text-white hover:text-orange"
               }`}
             >
               {item.name}
@@ -68,17 +70,23 @@ export default function Header() {
           ))}
         </nav>
         <div className="hidden md:flex gap-4">
-          <Button variant="outline" className="text-white border-gray hover:bg-gray/10 hover:text-orange">
+          <Button className="bg-orange text-white hover:bg-orange/80">
             Sign In
           </Button>
-          <Button className="bg-orange text-white hover:bg-orange/80">Sign Up</Button>
+          <Button className="bg-orange text-white hover:bg-orange/80">
+            Sign Up
+          </Button>
         </div>
         <button
           className="md:hidden text-white"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
         >
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </button>
       </div>
       {isMenuOpen && (
@@ -102,13 +110,15 @@ export default function Header() {
             </Link>
           ))}
           <div className="flex flex-col gap-2 mt-4">
-            <Button variant="outline" className="w-full justify-center border-gray text-white hover:bg-gray/10">
+            <Button className="w-full justify-center bg-orange text-white hover:bg-orange/80">
               Sign In
             </Button>
-            <Button className="w-full justify-center bg-orange hover:bg-orange/80">Sign Up</Button>
+            <Button className="w-full justify-center bg-orange hover:bg-orange/80">
+              Sign Up
+            </Button>
           </div>
         </motion.div>
       )}
     </motion.header>
-  )
+  );
 }

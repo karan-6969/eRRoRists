@@ -1,39 +1,42 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import IdeaCard from "@/components/idea-card"
-import { ArrowRight, Lightbulb, Users, Rocket } from "lucide-react"
-import { motion } from "framer-motion"
-import AnimatedText from "@/components/animated-text"
-import SectionHeading from "@/components/section-heading"
+import AnimatedText from "@/components/animated-text";
+import IdeaCard from "@/components/idea-card";
+import SectionHeading from "@/components/section-heading";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { ArrowRight, Lightbulb, Rocket, Users } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 // Sample data for featured ideas
 const featuredIdeas = [
   {
     id: "1",
     title: "AI-Powered Code Reviewer",
-    description: "Build an AI tool that reviews code and suggests improvements in real-time.",
+    description:
+      "Build an AI tool that reviews code and suggests improvements in real-time.",
     tags: ["AI", "Developer Tools", "SaaS"],
     status: "Open",
   },
   {
     id: "2",
     title: "Decentralized Marketplace",
-    description: "Create a peer-to-peer marketplace using blockchain technology.",
+    description:
+      "Create a peer-to-peer marketplace using blockchain technology.",
     tags: ["Blockchain", "Web3", "Marketplace"],
     status: "In Progress",
   },
   {
     id: "3",
     title: "Mental Health Tracker",
-    description: "An app that helps users track their mental health and provides resources.",
+    description:
+      "An app that helps users track their mental health and provides resources.",
     tags: ["Health", "Mobile App", "AI"],
     status: "Open",
   },
-]
+];
 
 export default function Home() {
   return (
@@ -58,12 +61,13 @@ export default function Home() {
                   className="text-3xl font-bebas tracking-wide sm:text-5xl xl:text-6xl/none text-white"
                 />
                 <motion.p
-                  className="max-w-[600px] text-gray md:text-xl"
+                  className="max-w-[600px] text-gray-300 md:text-xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
                 >
-                  Turn your innovative ideas into real products through collaboration with passionate builders.
+                  Turn your innovative ideas into real products through
+                  collaboration with passionate builders.
                 </motion.p>
               </div>
               <motion.div
@@ -79,8 +83,9 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link href="/ideas">
-                  <Button variant="outline" className="border-gray/30 text-white hover:bg-gray/10">
-                    Browse Ideas
+                  <Button className="bg-orange text-white hover:bg-orange/80 group">
+                    Ideas
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </Link>
               </motion.div>
@@ -131,7 +136,7 @@ export default function Home() {
             <Link href="/ideas">
               <Button
                 variant="outline"
-                className="border-gray/30 text-white hover:bg-gray/10 hover:border-orange group"
+                className="border-orange bg-gray/10 text-gray-300 hover:bg-gray/20 group"
               >
                 View All Ideas
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -158,17 +163,20 @@ export default function Home() {
               {
                 icon: <Lightbulb className="h-6 w-6 text-orange" />,
                 title: "Post your idea",
-                description: "Share your concept with our community of builders, designers, and product people.",
+                description:
+                  "Share your concept with our community of builders, designers, and product people.",
               },
               {
                 icon: <Users className="h-6 w-6 text-orange" />,
                 title: "Invite collaborators",
-                description: "Connect with skilled individuals who are passionate about your idea.",
+                description:
+                  "Connect with skilled individuals who are passionate about your idea.",
               },
               {
                 icon: <Rocket className="h-6 w-6 text-orange" />,
                 title: "Build together",
-                description: "Collaborate to transform your idea into a real product with our tools and resources.",
+                description:
+                  "Collaborate to transform your idea into a real product with our tools and resources.",
               },
             ].map((step, index) => (
               <motion.div
@@ -185,15 +193,23 @@ export default function Home() {
                       <motion.div
                         className="p-3 rounded-full bg-orange/10"
                         whileHover={{ scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 10,
+                        }}
                       >
                         {step.icon}
                       </motion.div>
                     </div>
-                    <h3 className="text-xl font-bebas tracking-wide text-center text-white">{step.title}</h3>
+                    <h3 className="text-xl font-bebas tracking-wide text-center text-white">
+                      {step.title}
+                    </h3>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray text-center">{step.description}</p>
+                    <p className="text-gray-300 text-center">
+                      {step.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -217,8 +233,12 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             <div className="space-y-2">
-              <h2 className="text-3xl font-bebas tracking-wide md:text-4xl text-white">Ready to get started?</h2>
-              <p className="max-w-[700px] text-gray md:text-lg">Join our community of innovators and builders today.</p>
+              <h2 className="text-3xl font-bebas tracking-wide md:text-4xl text-white">
+                Ready to get started?
+              </h2>
+              <p className="max-w-[700px] text-gray-300 md:text-lg">
+                Join our community of innovators and builders today.
+              </p>
             </div>
             <motion.div
               className="flex flex-col gap-2 min-[400px]:flex-row"
@@ -232,8 +252,9 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/join">
-                <Button variant="outline" className="border-gray/30 text-white hover:bg-gray/10">
+                <Button className="bg-orange text-white hover:bg-orange/80 group">
                   Join the Community
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
             </motion.div>
@@ -241,5 +262,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }
