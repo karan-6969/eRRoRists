@@ -1,40 +1,73 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowLeft, X } from "lucide-react"
-import { motion } from "framer-motion"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useUser } from "@clerk/nextjs";
+import { motion } from "framer-motion";
+import { ArrowLeft, X } from "lucide-react";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import type React from "react";
+import { useEffect, useState } from "react";
 
 export default function SubmitIdeaPage() {
-  const [tags, setTags] = useState<string[]>([])
-  const [tagInput, setTagInput] = useState("")
+  const { isLoaded, isSignedIn } = useUser();
+  const [tags, setTags] = useState<string[]>([]);
+  const [tagInput, setTagInput] = useState("");
+
+  // Redirect to sign-in if not authenticated
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      redirect("/sign-in");
+    }
+  }, [isLoaded, isSignedIn]);
 
   const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && tagInput.trim() !== "") {
-      e.preventDefault()
+      e.preventDefault();
       if (!tags.includes(tagInput.trim())) {
-        setTags([...tags, tagInput.trim()])
+        setTags([...tags, tagInput.trim()]);
       }
-      setTagInput("")
+      setTagInput("");
     }
-  }
+  };
 
   const handleRemoveTag = (tagToRemove: string) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove))
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
+
+  // Show loading state while checking authentication
+  if (!isLoaded) {
+    return (
+      <div className="container px-4 md:px-6 py-20 flex justify-center items-center min-h-[50vh]">
+        <div className="loader">
+          <div className="loader-bar"></div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="container px-4 md:px-6 py-16">
-      <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
-        <Link href="/" className="inline-flex items-center text-orange hover:text-orange/80 mb-6">
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Link
+          href="/"
+          className="inline-flex items-center text-orange hover:text-orange/80 mb-6"
+        >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to home
         </Link>
@@ -47,8 +80,12 @@ export default function SubmitIdeaPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bebas tracking-wide text-white">Submit Your Idea</h1>
-          <p className="text-gray mt-2">Share your innovative idea with our community of builders.</p>
+          <h1 className="text-3xl font-bebas tracking-wide text-white">
+            Submit Your Idea
+          </h1>
+          <p className="text-gray mt-2">
+            Share your innovative idea with our community of builders.
+          </p>
         </motion.div>
 
         <motion.form
@@ -107,7 +144,10 @@ export default function SubmitIdeaPage() {
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Badge variant="secondary" className="bg-gray/10 text-gray gap-1 pl-2">
+                  <Badge
+                    variant="secondary"
+                    className="bg-gray/10 text-gray gap-1 pl-2"
+                  >
                     {tag}
                     <button
                       type="button"
@@ -130,7 +170,8 @@ export default function SubmitIdeaPage() {
               className="bg-boulder border-gray/30 focus-visible:ring-orange text-white"
             />
             <p className="text-xs text-gray">
-              Add relevant tags to help others find your idea (e.g., AI, Mobile App, Fintech)
+              Add relevant tags to help others find your idea (e.g., AI, Mobile
+              App, Fintech)
             </p>
           </motion.div>
 
@@ -148,8 +189,12 @@ export default function SubmitIdeaPage() {
                 <SelectValue placeholder="Select status" />
               </SelectTrigger>
               <SelectContent className="bg-boulder border-gray/30 text-white">
-                <SelectItem value="open">Open - Looking for collaborators</SelectItem>
-                <SelectItem value="in-progress">In Progress - Already working on it</SelectItem>
+                <SelectItem value="open">
+                  Open - Looking for collaborators
+                </SelectItem>
+                <SelectItem value="in-progress">
+                  In Progress - Already working on it
+                </SelectItem>
                 <SelectItem value="done">Done - Completed project</SelectItem>
               </SelectContent>
             </Select>
@@ -161,12 +206,15 @@ export default function SubmitIdeaPage() {
             transition={{ duration: 0.3, delay: 0.5 }}
             whileHover={{ scale: 1.02 }}
           >
-            <Button type="submit" className="w-full bg-orange text-white hover:bg-orange/80">
+            <Button
+              type="submit"
+              className="w-full bg-orange text-white hover:bg-orange/80"
+            >
               Submit Idea
             </Button>
           </motion.div>
         </motion.form>
       </div>
     </div>
-  )
+  );
 }
